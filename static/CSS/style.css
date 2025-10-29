@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f6fa;
+}
+
+.navbar {
+    background-color: #1a1a2e;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background-color: #16213e;
+}
+
+.content {
+    padding: 30px;
+}
+
+/* Tabs */
+.tab {
+    display: none;
+}
+
+.active-tab {
+    display: block;
+}
+
+/* Book Cards */
+.books-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.book-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+}
+
+.book-card button {
+    background-color: #1a1a2e;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book-card button:hover {
+    background-color: #16213e;
+}
+
+/* Login page */
+.login-body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a2e;
+}
+
+.login-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.login-box input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.login-box button {
+    background-color: #1a1a2e;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #16213e;
+}
+
+/* Flash message styles */
+.flash {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Red for error */
+.flash.error {
+    background-color: #ffdddd;
+    color: #b30000;
+    border: 1px solid #b30000;
+}
+
+/* Green for success (optional) */
+.flash.success {
+    background-color: #ddffdd;
+    color: #007a00;
+    border: 1px solid #007a00;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
