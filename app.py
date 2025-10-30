@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, sessions
 from config import Config
-from routes.login import login_bp
+from routes import *
 app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(login_bp, url_prefix='/')
