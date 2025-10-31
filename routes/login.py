@@ -13,8 +13,9 @@ def login():
     password = request.form['password']
     if name and password:
         if os.getenv('ADMIN_USERNAME') == name and os.getenv('ADMIN_PASSWORD') == password:
+            print('Authentication successful')
             session['user'] = name
-            return render_template('books.html')
+            return render_template('base.html')
     flash("Invalid username or password", "error")
     return render_template('login.html')
 

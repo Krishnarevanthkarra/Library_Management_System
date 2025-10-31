@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='CSS/style.css')}}">
+</head>
+<body>
+  <nav class="navbar">
+  <ul>
+    <li class="bg-blue-500 text-white text-xl font-bold cursor px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/books'">Books</li>
+    <li class="bg-blue-500 text-white text-xl font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/transactions'">Transactions</li>
+    <li class="bg-blue-500 text-white text-xl font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/admin'">Admin</li>
+  </ul>
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

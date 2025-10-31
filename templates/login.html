@@ -3,7 +3,14 @@
     <title>LogIn</title>
 </head>
 <body>
-    <form action="http://localhost:8080" method="POST">
+    {% with messages = get_flashed_messages() %}
+        {% if messges %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="http://localhost:8080/login" method="POST">
         <p>Username: </p><input type="text" name="name">
         <br>
         <p>Password: </p><input type="password" name="password">
