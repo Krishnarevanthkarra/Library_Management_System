@@ -1,21 +1,37 @@
 <html>
 <head>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="flash-messages">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
     <title>
         {% block title %}
+        Home
         {% endblock %}
     </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename='CSS/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
 </head>
-<body>
+<header>
+    <h1>XYZ University</h1>
+</header>
+<body onload="window.location.href='/books">
   <nav class="navbar">
   <ul>
-    <li class="bg-blue-500 text-white text-xl font-bold cursor px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/books'">Books</li>
-    <li class="bg-blue-500 text-white text-xl font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/transactions'">Transactions</li>
-    <li class="bg-blue-500 text-white text-xl font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600" onclick="window.location.href='/admin'">Admin</li>
+    <li class="nav-item" onclick="window.location.href='/books'">Books</li>
+    <li class="nav-item" onclick="window.location.href='/transactions'">Transactions</li>
+    <li class="nav-item" onclick="window.location.href='/admin'">Admin</li>
   </ul>
 </nav>
 {% block content %}
 {% endblock %}
+<script src="{{ url_for('static', filename='JS/script.js')}}"></script>
 </body>
 </html>

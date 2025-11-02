@@ -3,5 +3,52 @@
     Admin Panel
 {% endblock %}
 {% block content %}
-    <p> This is the Admin Page.</p>
+    <div id="container">
+        <div class="admin-item" onclick="openModal('insert-book-modal')">
+            <p>Insert Book</p>
+        </div>
+        <div class="admin-item" onclick="openModal('remove-book-modal')">
+            <p>Remove Book</p>
+        </div>
+        <div class="admin-item" onclick="openModal('add-author-modal')">
+            <p>Add Author</p>
+        </div>
+        <div class="admin-item" onclick="openModal('remove-author-modal')">
+            <p>Remove Author</p>
+        </div>
+    </div>
+
+    <!-- Insert Book Dialog -->
+    <div id="insert-book-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>This is insert-book-dialog</p>
+        </div>
+    </div>
+
+    <!-- Remove Book Dialog -->
+    <div id="remove-book-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>This is remove-book-dialog</p>
+        </div>
+    </div>
+
+    <!-- Add Author Dialog -->
+    <div id="add-author-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <form action="{{ url_for('admin.add_author') }}" method="POST">
+                <p>Author Name: </p>
+                <input type="text" name="authorname">
+                <p>Description about Author: </p>
+                <input type="text" name="aboutauthor"/>
+                <button type="submit">Post Data</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remove Book Dialog -->
+    <div id="remove-author-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>This is remove-author modal</p>
+        </div>
+    </div>
 {% endblock %}

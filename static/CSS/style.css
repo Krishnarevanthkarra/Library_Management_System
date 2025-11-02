@@ -1,0 +1,16 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;                /* Full width */
+  height: 100vh;               /* Full height */
+  background-color: rgba(0, 0, 0, 0.6);  /* Full-page dark overlay */
+  justify-content: center;     /* Center horizontally */
+  align-items: center;         /* Center vertically */
+  z-index: 9999;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
