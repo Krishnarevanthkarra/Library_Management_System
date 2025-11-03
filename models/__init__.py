@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-#from models.book import Book
-from models.author import Author
-#from models.student import Student
-#from models.transaction import Transaction
+from .book_model import Book
+from .author_model import Author
+from .student_model import Student
+from .transaction_model import Transaction

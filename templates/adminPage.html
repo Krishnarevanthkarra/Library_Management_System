@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+    Admin Panel
+{% endblock %}
+{% block content %}
+
+    <div id="container">
+
+
+    <!-- Insert Book Dialog -->
+        <div id="insert-Book" onclick="toggleForm('insert-Book')">
+            <p>Insert-Book.</p>
+            <div id="insert-Book-Form" style="display: none;" onclick="event.stopPropagation()">
+                <form action="{{ url_for('admin.add_book') }}" method="POST">
+                    <p>Book Title: </p>
+                    <input type="text" name="title">
+                    <p>Book SubTitle: </p>
+                    <input type="text" name="subtitle">
+                    <p>Descrption: </p>
+                    <input type="text" name="description">
+                    <p>Select Author: </p>
+                    <select id="add_author_id" name="book_author_id">
+                        {% for author in authors %}
+                            <option value="{{author.author_id}}">{{ author.author_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="Submit">Add Book</button>
+                </form>
+            </div>
+        </div>
+
+
+    <!-- Remove Book Dialog -->
+        <div id="remove-Book" onclick="toggleForm('remove-Book')">
+            <p>Remove-Book.</p>
+            <div id="remove-Book-Form" style="display: none;" onclick="event.stopPropagation()">
+                    <form action="{{ url_for('admin.remove_book') }}" method="POST">
+                        <select id="book_id" name="book_id" onchange="isRemovalPossible('/admin/is-book-free/', 'book_id', 'remove-Book-Form')">
+                            <option value="" selected disabled>-- Select Book --</option>
+                            {% for book in books %}
+                                <option value="{{book.book_id}}">{{ book.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <p class="message" style="display: none">The Book is having some unfinished transactions please complete those first.</p>
+                        <button class="deleteButton" type="submit" style="display: block;">Remove Book</button>
+                </form>
+            </div>
+        </div>
+
+
+    <!-- Add Author Dialog -->
+        <div id="insert-Author" onclick="toggleForm('insert-Author')">
+            <p>Add Author.</p>
+            <div id="insert-Author-Form" style="display: none;" onclick="event.stopPropagation()">
+                <form action="{{ url_for('admin.add_author') }}" method="POST">
+                    <p>Name of the Author: </p>
+                    <input type="text" name="authorname">
+                    <p>About Author</p>
+                    <input type="text" name="aboutauthor">
+                    <button type="submit">Post Data</button>
+                </form>
+            </div>
+        </div>
+
+
+    <!-- Remove Author Dialog -->
+        <div id="remove-Author" onclick="toggleForm('remove-Author')">
+            <p>Remove Author.</p>
+            <div id="remove-Author-Form" style="display: none;" onclick="event.stopPropagation()">
+                <form action="{{ url_for('admin.remove_author') }}" method="POST">
+                    <select id="author_id" name="author_id" onchange="isRemovalPossible('/admin/is-author-free/', 'author_id', 'remove-Author-Form')">
+                        <option value="" selected disabled>-- Select Author --</option>
+                        {% for author in authors %}
+                            <option value="{{author.author_id}}">{{ author.author_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="message" style="display: none">The author related to some books. Kindly do changes in books to Delete the author info.</p>
+                    <button class="deleteButton" type="submit" style="display: block;">Remove Author</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

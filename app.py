@@ -15,8 +15,6 @@ with app.app_context():
     db.create_all()
 @app.route('/')
 def index():
-    #if 'user' in session:
-    #    return redirect(url_for('home'))
     return redirect(url_for('login.login'))
 
 if __name__ == '__main__':

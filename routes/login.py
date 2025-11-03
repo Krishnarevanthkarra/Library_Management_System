@@ -8,7 +8,7 @@ def login():
     #if 'user' in session:
     #   return redirect(url_for('home'))
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('loginPage.html')
     name = request.form['name']
     password = request.form['password']
     if name and password:
@@ -17,5 +17,5 @@ def login():
             session['user'] = name
             return render_template('base.html')
     flash("Invalid username or password", "error")
-    return render_template('login.html')
+    return render_template('loginPage.html')
 
