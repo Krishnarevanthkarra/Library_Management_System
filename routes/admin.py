@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, url_for, redirect,
 from models import db, Book, Author
 
 
+
 admin_bp = Blueprint('admin', __name__)
 
 
@@ -105,3 +106,32 @@ def is_book_free(book_id):
         return jsonify({'free': True})
     else:
         return jsonify({'free': False})
+
+
+# TO GET THE BOOK DETAILS FOR BOOK DETAILS UPDATE
+@admin_bp.route('admin/get-book/<int:book_id>', methods=['GET'])
+def get_book(book_id):
+    book = Book.query.get(book_id)
+    if book:
+        return jsonify(book.to_dict())
+    else:
+        flash("Book not found.")
+        return redirect(url_for('admin.show_admin'))
+
+# TO UPDATE THE BOOK DETAILS
+@admin_bp.route('/admin/update-book', methods=['POST'])
+def update_book():
+    if request.method == 'GET':
+        return redirect(url_for('admin.show_admin'))
+    print(request.form.get('book_id_get'))
+    book = Book.query.get(request.form.get('book_id_get'))
+    book.title = request.form.get('title')
+    book.subtitle = request.form.get('subtitle')
+    book.description = request.form.get('description')
+    copies = int(request.form.get('copies')) if request.form.get('copies') else 0
+    book.total_copies += int(copies)
+    book.available_copies += int(copies)
+    book.author_id = request.form.get('author_id')
+    db.session.commit()
+    flash('Successfully updated the book.')
+    return redirect(url_for('admin.show_admin'))
