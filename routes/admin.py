@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect, jsonify
-from models import db, Book, Author, Student
+from models import db, Book, Author, Student, Branch
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -10,7 +10,9 @@ admin_bp = Blueprint('admin', __name__)
 def show_admin():
     authors = Author.query.all()
     books = Book.query.all()
-    return render_template('adminPage.html', authors=authors, books=books)
+    branches = Branch.query.all()
+    students = Student.query.all()
+    return render_template('adminPage.html', authors=authors, books=books, branches=branches, students=students)
 
 
 
@@ -144,14 +146,42 @@ def update_book():
 def add_student():
     if request.method != 'POST':
         return redirect(url_for('admin.show_admin'))
-    student_id = request.form.get('student-id')
+    print(request.form.get('student-id'))
+    student_id = int(request.form.get('student-id'))
     student_name = request.form.get('student-name')
-    branch = request.form.get('branch-id')
-    if Student.query.filter_by(student_id=student_id).first():
+    branch = int(request.form.get('branch-id'))
+    print(student_id, student_name, branch)
+    student = Student.query.get(student_id)
+    if student:
         flash('Student already exists.')
         return redirect(url_for('admin.show_admin'))
-    student = Student(student_id=student_id, student_name=student_name, branch_id=branch)
+    student = Student(student_id=student_id, name=student_name, branch=branch)
     db.session.add(student)
     db.session.commit()
     flash('Student added successfully.')
     return redirect(url_for('admin.show_admin'))
+
+# TO REMOVE STUDENT
+@admin_bp.route('/admin/remove-student', methods=['POST'])
+def remove_student():
+    if request.method == 'GET':
+        return redirect(url_for('admin.show_admin'))
+    student_id = int(request.form.get('student-id-to-remove'))
+    student = Student.query.get(student_id)
+    if student:
+        db.session.delete(student)
+        db.session.commit()
+        flash('Student removed successfully.')
+        return redirect(url_for('admin.show_admin'))
+    else:
+        flash("Student not found.")
+    return redirect(url_for('admin.show_admin'))
+
+# TO CHECK STUDENT IS INVOLVED  IN ANY TRANSACTIONS
+@admin_bp.route('/admin/is-student-free/<int:student_id>', methods=['GET'])
+def is_student_free(student_id):
+    student = Student.query.get(student_id)
+    if student.book_limit == 2:
+        return jsonify({'free': True})
+    else:
+        return jsonify({'free': False})

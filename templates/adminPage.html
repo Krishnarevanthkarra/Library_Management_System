@@ -119,12 +119,13 @@
         </div>
     </div>
 
+    <!-- Add Student -->
     <div id="add-student-section" onclick="toggleForm('add-student')">
         <p>Add Student</p>
         <div id="add-student-form" style="display: none" onclick="event.stopPropagation()">
             <form action="{{ url_for('admin.add_student') }}" method="POST">
                 <p>Student ID:</p>
-                <input type="text" name="student-id">
+                <input type="number" name="student-id">
                 <p>student Name:</p>
                 <input type="text" name="student-name">
                 <p>Branch Name</p>
@@ -133,7 +134,27 @@
                         <option value="{{ branch.branch_id }}">{{ branch.branch_name }}</option>
                     {% endfor %}
                 </select>
-                <button type="submit">Update Book</button>
+                <button type="submit">Add The Student</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remove student Section -->
+    <div id="remove-student-section" onclick="toggleForm('remove-student')">
+        <p>Remove Student</p>
+        <div id="remove-student-form" style="display: none;" onclick="event.stopPropagation()">
+            <form action="{{ url_for('admin.remove_student') }}" method="POST">
+                <select id="remove-student-select" name="student-id-to-remove"
+                        onchange="checkIfRemovable('/admin/is-student-free/', 'remove-student-select', 'remove-student-form')">
+                    <option value="" selected disabled>-- Select Book --</option>
+                    {% for student in students %}
+                        <option value="{{student.student_id}}">{{ student.student_id }}</option>
+                    {% endfor %}
+                </select>
+                <p class="warning-message" style="display: none;">
+                    The Student has pending transactions. Complete them first.
+                </p>
+                <button class="delete-btn" type="submit" style="display: block;">Remove Student</button>
             </form>
         </div>
     </div>

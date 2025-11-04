@@ -69,8 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toggleTransForm(bookDiv, btn){
     const parent = document.getElementById(bookDiv);
-    const issueForm = parent.querySelectorAll('.issue-form');
-    const returnForm = parent.querySelectorAll('.return-form');
+    const issueForm = parent.querySelector('.issue-form');
+    const returnForm = parent.querySelector('.return-form');
     if(btn){
         issueForm.style.display = 'block';
         returnForm.style.display = 'none';
@@ -80,4 +80,26 @@ function toggleTransForm(bookDiv, btn){
     }
 }
 
-function checkStudentLimit(url, )
+function checkStudent(url, parentDiv) {
+    const parent = document.getElementById(parentDiv);
+    const studentId = parent.querySelector('.issue-form').querySelector('.student-id').value;
+    fetch(`${url}${studentId}`)
+        .then(res => res.json())
+        .then(data => {
+            const isFree = data.free;
+            //const parent = document.getElementById(formContainerId);
+            const form = parent.querySelector('.student-info-form');
+            const button = form.querySelector('.issue-btn-2');
+            form.style.display = 'block';
+            form.querySelector('.student-id').value = studentId;
+            form.querySelector('.student-name').innerText = data.student_name;
+            form.querySelector('.student-branch').innerText = data.student_branch;
+            if (isFree) {
+                button.disabled = false;
+                button.innerText = 'Issue to Student';
+            } else {
+                button.disabled = true;
+                button.innerText = 'Limit Exceeded';
+            }
+        });
+}

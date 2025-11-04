@@ -10,7 +10,7 @@ class Book(db.Model):
     available_copies = db.Column(db.Integer,default=5)
     author_id = db.Column(db.Integer, db.ForeignKey('Authors.author_id'), nullable=False)
 
-    transactions = db.relationship('Transaction', backref='book', lazy='dynamic')
+    transactions = db.relationship('Transaction', backref='books', lazy='dynamic')
 
     def to_dict(self):
         return {
