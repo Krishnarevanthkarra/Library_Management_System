@@ -3,5 +3,44 @@
     Books
 {% endblock %}
 {% block content %}
-    <p>This is Books Page.</p>
+    <div id="books-container">
+        {% for book in books %}
+        <div id="book-{{ book.book_id }}"
+                class="book-card"
+                data-available="{{ book.available_copies }}"
+                data-total_copies="{{ book.total_copies }}">
+            <h2>{{ book.title }}</h2>
+            <h3>{{ book.subtitle }}</h3>
+            <p>{{ book.description }}</p>
+            <h3>Author Name: </h3>
+            {% with author = authors.query.get(book.author_id) %}
+            <p>{{ author.author_name }}</p>
+            <h5>About Author:</h5>
+            <p>{{ author.about_author }}</p>
+            {% endwith %}
+            <button class="issue-btn" onclick="toggleTransForm('book-{{ book.book_id }}', true)"  disabled>Issue Book</button>
+            <button class="return-btn" onclick="toggleTransForm('book-{{ book.book_id }}', false)" disabled>Take Return</button>
+
+            <form class="issue-form" style="display: none">
+                <select id="student-id" name="student-id" onchange="checkStudentLimit('/book/check-student-limit/', 'student-id', 'book-{{ book.book_id}}')">
+                    <option value="" selected disabled>-- Select student --</option>
+                    {% for student in students %}
+                        <option value="{{student.student_id}}">{{ student.student_id }}</option>
+                    {% endfor %}
+                </select>
+                <div id="student-details" style="display: none">
+                    <p>Name of the Student:</p>
+                    <p class="student-name"></p>
+                    <p>Branch of Student:</p>
+                    <p class="student-branch"></p>
+                    <button class="student-issue-btn" onclikck="" disabled>Issue</button>
+                </div>
+            </form>
+            <form class="return-form" style="display: none">
+
+            </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect, jsonify
-from models import db, Book, Author
-
-
+from models import db, Book, Author, Student
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -108,6 +106,7 @@ def is_book_free(book_id):
         return jsonify({'free': False})
 
 
+
 # TO GET THE BOOK DETAILS FOR BOOK DETAILS UPDATE
 @admin_bp.route('admin/get-book/<int:book_id>', methods=['GET'])
 def get_book(book_id):
@@ -117,6 +116,8 @@ def get_book(book_id):
     else:
         flash("Book not found.")
         return redirect(url_for('admin.show_admin'))
+
+
 
 # TO UPDATE THE BOOK DETAILS
 @admin_bp.route('/admin/update-book', methods=['POST'])
@@ -134,4 +135,23 @@ def update_book():
     book.author_id = request.form.get('author_id')
     db.session.commit()
     flash('Successfully updated the book.')
+    return redirect(url_for('admin.show_admin'))
+
+
+
+# TO ADD STUDENT
+@admin_bp.route('/admin/addstudent', methods=['POST'])
+def add_student():
+    if request.method != 'POST':
+        return redirect(url_for('admin.show_admin'))
+    student_id = request.form.get('student-id')
+    student_name = request.form.get('student-name')
+    branch = request.form.get('branch-id')
+    if Student.query.filter_by(student_id=student_id).first():
+        flash('Student already exists.')
+        return redirect(url_for('admin.show_admin'))
+    student = Student(student_id=student_id, student_name=student_name, branch_id=branch)
+    db.session.add(student)
+    db.session.commit()
+    flash('Student added successfully.')
     return redirect(url_for('admin.show_admin'))
