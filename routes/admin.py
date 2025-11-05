@@ -166,7 +166,7 @@ def add_student():
 def remove_student():
     if request.method == 'GET':
         return redirect(url_for('admin.show_admin'))
-    student_id = int(request.form.get('student-id-to-remove'))
+    student_id = request.form.get('student-id-to-remove')
     student = Student.query.get(student_id)
     if student:
         db.session.delete(student)

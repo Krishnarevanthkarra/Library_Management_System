@@ -7,5 +7,5 @@ class Student(db.Model):
     branch = db.Column(db.Integer, db.ForeignKey('Branches.branch_id'), nullable=False)
     book_limit = db.Column(db.Integer, nullable=False, default=2)
 
-    transactions = db.relationship('Transaction', backref='students', lazy='dynamic')
+    transactions = db.relationship('Transaction', backref='students', lazy='dynamic',cascade="all, delete-orphan")
 

@@ -12,13 +12,13 @@
         <div id="add-book-form" style="display: none;" onclick="event.stopPropagation()">
             <form action="{{ url_for('admin.add_book') }}" method="POST">
                 <p>Book Title:</p>
-                <input type="text" name="title">
+                <input type="text" name="title" required>
                 <p>Book Subtitle:</p>
-                <input type="text" name="subtitle">
+                <input type="text" name="subtitle" required>
                 <p>Description:</p>
-                <input type="text" name="description">
+                <input type="text" name="description" required>
                 <p>Select Author:</p>
-                <select id="add-book-author" name="book_author_id">
+                <select id="add-book-author" name="book_author_id" required>
                     {% for author in authors %}
                         <option value="{{author.author_id}}">{{ author.author_name }}</option>
                     {% endfor %}
