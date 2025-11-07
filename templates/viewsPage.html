@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    Views
+{% endblock %}
+{% block content %}
+    <div class="views-container">
+        <div onclick="window.location.href='/views/authors-to-books'">
+            Authors to Books
+        </div>
+        <div onclick="window.location.href='/views/students-to-transactions'">
+            Students to Transactions
+        </div>
+        <div onclick="window.location.href='/views/active-transactions'">
+            Active Transactions
+        </div>
+    </div>
+{% endblock %}

@@ -6,6 +6,12 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <header>
     <h1>XYZ University</h1>
@@ -14,8 +20,9 @@
   <nav class="navbar">
   <ul>
     <li class="nav-item" onclick="window.location.href='/books'">Books</li>
-    <li class="nav-item" onclick="window.location.href='/transactions'">Transactions</li>
+    <li class="nav-item" onclick="window.location.href='/views'">Views</li>
     <li class="nav-item" onclick="window.location.href='/admin'">Admin</li>
+    <li class="nav-item"  onclick="window.location.href='/logout'" style="margin-left: auto">Logout</li>
   </ul>
 </nav>
     {% with messages = get_flashed_messages(with_categories=true) %}

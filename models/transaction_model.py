@@ -6,5 +6,3 @@ class Transaction(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('Books.book_id'), nullable=False)
     student_id = db.Column(db.Integer, db.ForeignKey('Students.student_id'), nullable=False)
     issued_date = db.Column(db.Date, nullable=False)
-    return_date = db.Column(db.Date, nullable=True)
-    status = db.Column(db.String(10), default='Issued')

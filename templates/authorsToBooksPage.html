@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    Authors-Books
+{% endblock %}
+{% block content %}
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search authors by name...">
+    </div>
+    <div class="authors-to-books">
+        {%  for author in authors %}
+            <div id="author-{{ author.author_id }}" onclick="viewBooks('{{ author.author_id }}')">
+                <h3>{{ author.author_name }}</h3>
+                <p><b>{{ author.about_author }}</b></p>
+                <div class="books-info" style="display: none" onclick="event.stopPropagation()">
+                    {% if not author.books %}
+                        <p>Library has no Books written by this author.</p>
+                    {% endif %}
+                    {% for book in author.books %}
+                        <h3>{{ book.title }}</h3>
+                        <h5>{{ book.subtitle }}</h5>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

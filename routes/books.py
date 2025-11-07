@@ -40,8 +40,7 @@ def close_transaction():
     book.available_copies += 1
     student = Student.query.get(transaction.student_id)
     student.book_limit += 1
-    transaction.return_date = date.today()
-    transaction.status = 'Returned'
+    db.session.delete(transaction)
     db.session.commit()
     flash('Transaction has been closed.', 'success')
     return redirect(url_for('books.show_books'))

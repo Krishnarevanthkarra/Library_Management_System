@@ -17,6 +17,7 @@ header {
     color: #F2F2F2; /* Warm White */
     padding: 1rem 0;
     text-align: center;
+    font-family: Arial;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,6 +46,7 @@ header h1 {
     padding: 1rem 2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 .navbar li.nav-item:hover {
@@ -303,5 +305,339 @@ header h1 {
 
     #admin-container > div {
         padding: 1rem;
+    }
+}
+
+/* Add this to your style.css for the search container */
+.search-container {
+    max-width: 800px;
+    margin: 2rem auto 1rem;
+    padding: 0 1rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #D3D3D3; /* Light Gray */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #F2F2F2; /* Warm White */
+    color: #36454F; /* Charcoal Gray */
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #003366; /* Electric Blue */
+    box-shadow: 0 0 0 3px rgba(0, 169, 224, 0.1);
+}
+
+#search-input::placeholder {
+    color: #708238; /* Olive Green */
+    opacity: 0.7;
+}
+
+/* Authors to Books Page Styles */
+.authors-to-books {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.authors-to-books > div {
+    background-color: #F5F5DC; /* Beige */
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.authors-to-books > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #FFDAB9; /* Pale Peach */
+}
+
+.authors-to-books h3 {
+    color: #003366; /* Dark Blue */
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.authors-to-books p {
+    color: #36454F; /* Charcoal Gray */
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.authors-to-books p b {
+    font-weight: 600;
+    color: #708238; /* Olive Green */
+}
+
+.books-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #F2F2F2; /* Warm White */
+    border-radius: 5px;
+    border-left: 4px solid #97BC62; /* Moss Green */
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.books-info h3 {
+    color: #00A9E0; /* Electric Blue */
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.books-info h5 {
+    color: #36454F; /* Charcoal Gray */
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.books-info p {
+    color: #FF69B4; /* Neon Pink */
+    font-style: normal;
+    margin-bottom: 0.5rem;
+}
+
+/* Views Page Styles */
+.views-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.views-container > div {
+    background-color: #B0E0E6; /* Powder Blue */
+    color: #003366; /* Dark Blue */
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.views-container > div:hover {
+    background-color: #00A9E0; /* Electric Blue */
+    color: #F2F2F2; /* Warm White */
+    transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .authors-to-books {
+        gap: 1rem;
+    }
+
+    .authors-to-books > div {
+        padding: 1rem;
+    }
+
+    .views-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .views-container > div {
+        padding: 1rem;
+    }
+}
+
+/* Students to Transactions Page Styles */
+.search-container {
+    max-width: 800px;
+    margin: 2rem auto 1rem;
+    padding: 0 1rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #D3D3D3; /* Light Gray */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #F2F2F2; /* Warm White */
+    color: #36454F; /* Charcoal Gray */
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #00A9E0; /* Electric Blue */
+    box-shadow: 0 0 0 3px rgba(0, 169, 224, 0.1);
+}
+
+#search-input::placeholder {
+    color: #708238; /* Olive Green */
+    opacity: 0.7;
+}
+
+.students-to-transactions {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.students-to-transactions > div {
+    background-color: #F5F5DC; /* Beige */
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.students-to-transactions > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #FFDAB9; /* Pale Peach */
+}
+
+.students-to-transactions h3 {
+    color: #003366; /* Dark Blue */
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.students-to-transactions p {
+    color: #36454F; /* Charcoal Gray */
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.students-to-transactions p b {
+    font-weight: 600;
+    color: #708238; /* Olive Green */
+}
+
+.transactions-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #F2F2F2; /* Warm White */
+    border-radius: 5px;
+    border-left: 4px solid #97BC62; /* Moss Green */
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.transactions-info p {
+    color: #00A9E0; /* Electric Blue */
+    margin-bottom: 0.5rem;
+    font-style: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .students-to-transactions {
+        gap: 1rem;
+    }
+
+    .students-to-transactions > div {
+        padding: 1rem;
+    }
+
+    .transactions-info p {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Active Transactions Page Styles */
+.active-transactions-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    overflow-x: auto; /* For responsive horizontal scroll on small screens */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F2F2F2; /* Warm White */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+thead {
+    background-color: #003366; /* Dark Blue */
+    color: #F2F2F2; /* Warm White */
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #00A9E0; /* Electric Blue */
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F5F5DC; /* Beige */
+}
+
+tbody tr:hover {
+    background-color: #FFDAB9; /* Pale Peach */
+    transform: scale(1.01);
+}
+
+tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid #D3D3D3; /* Light Gray */
+    color: #36454F; /* Charcoal Gray */
+    font-size: 1rem;
+}
+
+tbody td:first-child {
+    font-weight: 600;
+    color: #708238; /* Olive Green */
+}
+
+tbody td:last-child {
+    font-weight: 600;
+    color: #708238; /* Olive Green */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .active-transactions-container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    thead th,
+    tbody td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    table {
+        font-size: 0.9rem;
     }
 }

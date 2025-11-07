@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+    Students-Transactions
+{% endblock %}
+{% block content %}
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search students by ID...">
+    </div>
+    <div class="students-to-transactions">
+        {%  for student in students %}
+            <div id="student-{{ student.student_id }}" onclick="viewTransactions('{{ student.student_id }}')">
+                <h3>{{ student.student_id }} ({{ student.branches.branch_name }})</h3>
+                <p><b>{{ student.name }}</b></p>
+                <div class="transactions-info" style="display: none" onclick="event.stopPropagation()">
+                    {% if not student.transactions %}
+                        <p>Student Have no Books Issued.</p>
+                    {% endif %}
+                    {% for transaction in student.transactions %}
+                        <h5>Issue Date: {{ transaction.issued_date }}</h5>
+                        <h5>Book Name: {{ transaction.books.title }}</h5>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -3,8 +3,14 @@
     Books
 {% endblock %}
 {% block content %}
-    <div class="books-container">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search books by title...">
+    </div>
+    {% if not books %}
+        <div class="empty-message" style="text-align: center">No books available. Please add some!</div>
+    {%  endif %}
 
+    <div class="books-container">
         {% for book in books %}
         <div id="book-{{ book.book_id }}"
                 class="book-card"
@@ -15,7 +21,7 @@
             <h5>{{ book.subtitle }}</h5>
             <p>{{ book.description }}</p>
 
-            <h3>Author Name: </h3>
+            <h5>Author Name: </h5>
             {% with author = authors.query.get(book.author_id) %}
             <p>{{ author.author_name }}</p>
             <h5>About Author:</h5>
@@ -47,7 +53,7 @@
             </form>
 
             <div class="return-form" style="display: none">
-                {% for transaction in book.transactions if transaction.status == 'Issued' %}
+                {% for transaction in book.transactions %}
                 <form id="return-form-{{ transaction.transaction_id }}" action="{{ url_for('books.close_transaction') }}" method="POST">
                     <input type="hidden" name="transaction-id" value="{{ transaction.transaction_id }}">
                     <input type="hidden" name="student-id" value="{{ transaction.student_id }}">
@@ -61,7 +67,6 @@
                 </form>
                 {% endfor %}
             </div>
-
 
         </div>
         {% endfor %}

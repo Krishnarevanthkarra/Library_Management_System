@@ -114,3 +114,75 @@ function checkStudent(url, parentDiv) {
             }
         });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const bookCards = document.querySelectorAll('.book-card');
+
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                bookCards.forEach(function(card) {
+                    const title = card.querySelector('h2').textContent.toLowerCase();
+                    if (title.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const authorDivs = document.querySelectorAll('.authors-to-books > div');
+
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                authorDivs.forEach(function(div) {
+                    const name = div.querySelector('h3').textContent.toLowerCase();
+                    if (name.includes(query)) {
+                        div.style.display = 'block';
+                    } else {
+                        div.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const authorDivs = document.querySelectorAll('.students-to-transactions > div');
+
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                authorDivs.forEach(function(div) {
+                    const name = div.querySelector('h3').textContent.toLowerCase();
+                    if (name.includes(query)) {
+                        div.style.display = 'block';
+                    } else {
+                        div.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+
+$(document).ready(function() {
+  $('select').select2({
+    placeholder: "Select an option",
+    dropdownAutoWidth: true,
+    width: '100%'
+    // Do NOT include minimumResultsForSearch: Infinity
+  });
+});
+
+   function viewBooks(author_id){
+  const parent = document.getElementById('author-' + author_id);
+  const books = parent.querySelector('.books-info');
+  books.style.display = (books.style.display === 'none') ? 'block' : 'none';
+}
+   function viewTransactions(student_id){
+  const parent = document.getElementById('student-' + student_id);
+  const transactions = parent.querySelector('.transactions-info');
+  transactions.style.display = (transactions.style.display === 'none') ? 'block' : 'none';
+}
