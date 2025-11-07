@@ -3,7 +3,7 @@
     Books
 {% endblock %}
 {% block content %}
-    <div id="books-container">
+    <div class="books-container">
 
         {% for book in books %}
         <div id="book-{{ book.book_id }}"
@@ -12,7 +12,7 @@
                 data-total_copies="{{ book.total_copies }}">
 
             <h2>{{ book.title }}</h2>
-            <h3>{{ book.subtitle }}</h3>
+            <h5>{{ book.subtitle }}</h5>
             <p>{{ book.description }}</p>
 
             <h3>Author Name: </h3>
@@ -36,31 +36,32 @@
 
             <form class="student-info-form" style="display: none" action="{{ url_for('books.add_book_transaction') }}" method="POST">
                 <input type="hidden" class="student-id" name="student-id">
-                <p>Name of the student: </p>
-                <p class="student-name"></p>
-                <p>Branch of the Student: </p>
-                <p class="student-branch"></p>
+                <p style="display: inline">Name of the student: </p>
+                <p class="student-name" style="display: inline"></p>
+                <br>
+                <p style="display: inline">Branch of the Student: </p>
+                <p class="student-branch" style="display: inline"></p>
                 <input type="hidden" class="book-id" name="book-id" value="{{ book.book_id }}">
+                <br>
                 <button class="issue-btn-2" disabled></button>
             </form>
 
             <div class="return-form" style="display: none">
                 {% for transaction in book.transactions if transaction.status == 'Issued' %}
-                    <form id="return-form-{{ transaction.transaction_id }}" action="{{ url_for('books.close_transaction') }}" method="POST">
-                        <input type="hidden" name="transaction-id" value="{{ transaction.transaction_id }}">
-                        <input type="hidden" name="student-id" value="{{ transaction.student_id }}"
-                        <p>Issue Date</p>
-                        <h5>{{ transaction.issued_date }}</h5>
-                        <p>Student Id: </p>
-                        <p>{{ transaction.student_id }}</p>
-                        <p>Name of the Student: </p>
-                        <p>{{ transaction.students.name }}</p>
-                        <p>Branch of the Student: </p>
-                        <p>{{ transaction.students.branches.branch_name }}</p>
-                        <button type="submit">Close Transaction</button>
-                    </form>
+                <form id="return-form-{{ transaction.transaction_id }}" action="{{ url_for('books.close_transaction') }}" method="POST">
+                    <input type="hidden" name="transaction-id" value="{{ transaction.transaction_id }}">
+                    <input type="hidden" name="student-id" value="{{ transaction.student_id }}">
+
+                    <p>Issue Date: <span>{{ transaction.issued_date }}</span></p>
+                    <p>Student ID: <span>{{ transaction.student_id }}</span></p>
+                    <p>Name of the Student: <span>{{ transaction.students.name }}</span></p>
+                    <p>Branch of the Student: <span>{{ transaction.students.branches.branch_name }}</span></p>
+
+                    <button type="submit">Close Transaction</button>
+                </form>
                 {% endfor %}
             </div>
+
 
         </div>
         {% endfor %}

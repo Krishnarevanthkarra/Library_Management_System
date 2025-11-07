@@ -12,7 +12,6 @@ def show_books():
 def is_student_free(student_id):
     student = Student.query.get(student_id)
     message = {'free': True, 'student_name': student.name, 'student_branch': student.branches.branch_name}
-    print(message)
     if student.book_limit > 0:
         return jsonify(message)
     else:

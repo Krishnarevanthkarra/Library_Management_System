@@ -26,7 +26,7 @@ def add_author():
     new_author = Author(author_name=name, about_author=about)
     db.session.add(new_author)
     db.session.commit()
-    flash('Added the Author successfully.', 'info')
+    flash('Added the Author successfully.', 'success')
     return redirect(url_for('admin.show_admin'))
 
 
@@ -36,16 +36,16 @@ def add_author():
 def remove_author():
     author_id = request.form.get('author_id')
     if not author_id:
-        flash("No author selected.")
+        flash("No author selected." 'error')
         return redirect(url_for('admin.show_admin'))
 
     author = Author.query.get(author_id)
     if author:
         db.session.delete(author)
         db.session.commit()
-        flash(f"Removed author: {author.author_name}")
+        flash(f"Removed author: {author.author_name}", 'success')
     else:
-        flash("Author not found.")
+        flash("Author not found."'error')
 
     return redirect(url_for('admin.show_admin'))
 
@@ -73,7 +73,7 @@ def add_book():
     newBook = Book(title=title, subtitle=subTitle, description=description, author_id=author_id)
     db.session.add(newBook)
     db.session.commit()
-    flash("Book added successfully.", 'info')
+    flash("Book added successfully.", 'success')
     return redirect(url_for('admin.show_admin'))
 
 
@@ -85,15 +85,15 @@ def remove_book():
         return redirect(url_for('admin.show_admin'))
     book_id = request.form.get('book_id')
     if not book_id:
-        flash("No book selected.")
+        flash("No book selected.", 'error')
         return redirect(url_for('admin.show_admin'))
     book = Book.query.get(book_id)
     if book:
         db.session.delete(book)
         db.session.commit()
-        flash("Book removed successfully.", 'info')
+        flash("Book removed successfully.", 'success')
     else:
-        flash("Book not found.")
+        flash("Book not found.", 'error')
     return redirect(url_for('admin.show_admin'))
 
 
@@ -116,7 +116,7 @@ def get_book(book_id):
     if book:
         return jsonify(book.to_dict())
     else:
-        flash("Book not found.")
+        flash("Book not found.", 'error')
         return redirect(url_for('admin.show_admin'))
 
 
@@ -126,7 +126,6 @@ def get_book(book_id):
 def update_book():
     if request.method == 'GET':
         return redirect(url_for('admin.show_admin'))
-    print(request.form.get('book_id_get'))
     book = Book.query.get(request.form.get('book_id_get'))
     book.title = request.form.get('title')
     book.subtitle = request.form.get('subtitle')
@@ -136,7 +135,7 @@ def update_book():
     book.available_copies += int(copies)
     book.author_id = request.form.get('author_id')
     db.session.commit()
-    flash('Successfully updated the book.')
+    flash('Successfully updated the book.', 'success')
     return redirect(url_for('admin.show_admin'))
 
 
@@ -146,19 +145,17 @@ def update_book():
 def add_student():
     if request.method != 'POST':
         return redirect(url_for('admin.show_admin'))
-    print(request.form.get('student-id'))
     student_id = int(request.form.get('student-id'))
     student_name = request.form.get('student-name')
     branch = int(request.form.get('branch-id'))
-    print(student_id, student_name, branch)
     student = Student.query.get(student_id)
     if student:
-        flash('Student already exists.')
+        flash('Student already exists.', 'error')
         return redirect(url_for('admin.show_admin'))
     student = Student(student_id=student_id, name=student_name, branch=branch)
     db.session.add(student)
     db.session.commit()
-    flash('Student added successfully.')
+    flash('Student added successfully.','success')
     return redirect(url_for('admin.show_admin'))
 
 # TO REMOVE STUDENT
@@ -171,10 +168,10 @@ def remove_student():
     if student:
         db.session.delete(student)
         db.session.commit()
-        flash('Student removed successfully.')
+        flash('Student removed successfully.', 'success')
         return redirect(url_for('admin.show_admin'))
     else:
-        flash("Student not found.")
+        flash("Student not found.", 'error')
     return redirect(url_for('admin.show_admin'))
 
 # TO CHECK STUDENT IS INVOLVED  IN ANY TRANSACTIONS

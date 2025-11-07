@@ -1,16 +1,307 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;                /* Full width */
-  height: 100vh;               /* Full height */
-  background-color: rgba(0, 0, 0, 0.6);  /* Full-page dark overlay */
-  justify-content: center;     /* Center horizontally */
-  align-items: center;         /* Center vertically */
-  z-index: 9999;
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F2F2F2; /* Warm White */
+    color: #36454F; /* Charcoal Gray */
+    line-height: 1.6;
+}
+
+header {
+    background-color: #003366; /* Dark Blue */
+    color: #F2F2F2; /* Warm White */
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+/* Navigation */
+.navbar {
+    background-color: #B0E0E6; /* Powder Blue */
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li.nav-item {
+    display: inline-block;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar li.nav-item:hover {
+    background-color: #00A9E0; /* Electric Blue */
+    color: #F2F2F2; /* Warm White */
+}
+
+/* Flash Messages */
+#flash-messages {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.flash {
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    color: #F2F2F2; /* Warm White */
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    animation: slideIn 0.3s ease;
+}
+
+.flash.success {
+    background-color: #6fd563; /* Moss Green */
+}
+
+.flash.error {
+    background-color: #ca3434; /* Neon Pink */
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Books Page Styles */
+.books-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.book-card {
+    background-color: #F5F5DC; /* Beige */
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.book-card h2 {
+    color: #003366; /* Dark Blue */
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-card h5 {
+    color: #708238; /* Olive Green */
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.book-card h5 {
+    color: #36454F; /* Charcoal Gray */
+    font-size: 1rem;
+    margin: 0.5rem 0 0.25rem;
+}
+
+.book-card p {
+    margin-bottom: 1rem;
+    color: #36454F; /* Charcoal Gray */
+}
+
+.book-card button {
+    background-color: #00A9E0; /* Electric Blue */
+    color: #F2F2F2; /* Warm White */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.book-card button:hover:not(:disabled) {
+    background-color: #003366; /* Dark Blue */
+}
+
+.book-card button:disabled {
+    background-color: #D3D3D3; /* Light Gray */
+    cursor: not-allowed;
+}
+
+.issue-btn-2:disabled {
+    background-color: #97BC62; /* Moss Green */
+}
+
+.issue-form, .student-info-form, .return-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #F2F2F2; /* Warm White */
+    border-radius: 5px;
+}
+
+.issue-form select, .student-info-form input[type="hidden"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #D3D3D3; /* Light Gray */
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+}
+.return-form form {
+    background-color: #FFDAB9; /* Pale Peach */
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #708238; /* Olive Green */
+}
+
+.return-form button {
+    background-color: #FF69B4; /* Neon Pink */
+    color: #000000; /* Black */
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.return-form button:hover {
+    background-color: #FFDAB9; /* Pale Peach */
+}
+
+/* Admin Page Styles */
+#admin-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+#admin-container > div {
+    background-color: #F5F5DC; /* Beige */
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+#admin-container > div:hover {
+    background-color: #FFDAB9; /* Pale Peach */
+}
+
+#admin-container > div > p {
+    font-size: 1.2rem;
+    color: #003366; /* Dark Blue */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+#admin-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+#admin-container input, #admin-container select {
+    padding: 0.75rem;
+    border: 1px solid #D3D3D3; /* Light Gray */
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+#admin-container button {
+    background-color: #97BC62; /* Moss Green */
+    color: #F2F2F2; /* Warm White */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+#admin-container button:hover {
+    background-color: #708238; /* Olive Green */
+}
+
+.delete-btn {
+    background-color: #FF69B4; /* Neon Pink */
+    color: #000000; /* Black */
+}
+
+.delete-btn:hover {
+    background-color: #D3D3D3; /* Light Gray */
+}
+
+.warning-message {
+    background-color: #FFDAB9; /* Pale Peach */
+    color: #708238; /* Olive Green */
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #FF69B4; /* Neon Pink */
+}
+
+/* Update Book Specific */
+#update-book-details {
+    display: none;
+}
+
+#update-book-details input, #update-book-details select {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .books-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .navbar li.nav-item {
+        text-align: center;
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    #admin-container {
+        padding: 0 0.5rem;
+    }
+
+    #admin-container > div {
+        padding: 1rem;
+    }
 }

@@ -1,17 +1,5 @@
 <html>
 <head>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div id="flash-messages">
-      {% for category, message in messages %}
-        <div class="flash {{ category }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
-
     <title>
         {% block title %}
         Home
@@ -30,6 +18,15 @@
     <li class="nav-item" onclick="window.location.href='/admin'">Admin</li>
   </ul>
 </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 {% block content %}
 {% endblock %}
 <script src="{{ url_for('static', filename='JS/script.js')}}"></script>

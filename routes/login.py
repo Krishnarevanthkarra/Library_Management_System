@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session, flash
+from flask import Blueprint, request, render_template, session, flash, redirect, url_for
 import os
 login_bp = Blueprint('login', __name__, url_prefix='')
 
@@ -15,7 +15,7 @@ def login():
         if os.getenv('ADMIN_USERNAME') == name and os.getenv('ADMIN_PASSWORD') == password:
             print('Authentication successful')
             session['user'] = name
-            return render_template('base.html')
+            return redirect(url_for('books.show_books'))
     flash("Invalid username or password", "error")
     return render_template('loginPage.html')
 

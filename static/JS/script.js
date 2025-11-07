@@ -3,7 +3,6 @@ function toggleForm(sectionId) {
     const formDiv = document.getElementById(sectionId + '-form');
     formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
 }
-
 // Flash messages timeout
 setTimeout(() => {
     const flashDiv = document.getElementById('flash-messages');
@@ -71,12 +70,24 @@ function toggleTransForm(bookDiv, btn){
     const parent = document.getElementById(bookDiv);
     const issueForm = parent.querySelector('.issue-form');
     const returnForm = parent.querySelector('.return-form');
+    const studentInfo = parent.querySelector('.student-info-form');
     if(btn){
-        issueForm.style.display = 'block';
-        returnForm.style.display = 'none';
+        if(issueForm.style.display === 'block'){
+            issueForm.style.display = 'none';
+            studentInfo.style.display = 'none';
+        }else {
+            issueForm.style.display = 'block';
+            returnForm.style.display = 'none';
+        }
     }else{
-        issueForm.style.display = 'none';
-        returnForm.style.display = 'block';
+        if(returnForm.style.display === 'block'){
+            returnForm.style.display = 'none';
+        }else {
+            console.log('student');
+            issueForm.style.display = 'none';
+            studentInfo.style.display = 'none';
+            returnForm.style.display = 'block';
+        }
     }
 }
 
