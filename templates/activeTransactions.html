@@ -3,6 +3,9 @@
     Active Transactions
 {% endblock %}
 {% block content %}
+    {% if not transactions %}
+        <h2>There are no active transactions</h2>
+    {% endif %}
     <div class="active-transactions-container">
         <table>
             <thead>

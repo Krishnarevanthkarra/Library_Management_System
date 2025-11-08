@@ -2,7 +2,5 @@ venv/
 .idea/
 __pycache__/
 instance/
-static/Images/
 *.pyc
 *.db
-.env

@@ -4,6 +4,9 @@
     Authors-Books
 {% endblock %}
 {% block content %}
+    {% if not authors %}
+        <h2>Add some authors</h2>
+    {% endif %}
     <div class="search-container">
         <input type="text" id="search-input" placeholder="Search authors by name...">
     </div>

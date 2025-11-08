@@ -3,6 +3,9 @@
     Students-Transactions
 {% endblock %}
 {% block content %}
+    {% if not students %}
+        <h2>There are no students. Add using admin panel.</h2>
+    {% endif %}
     <div class="search-container">
         <input type="text" id="search-input" placeholder="Search students by ID...">
     </div>
