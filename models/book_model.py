@@ -3,9 +3,9 @@ from . import db
 class Book(db.Model):
     __tablename__ = 'Books'
     book_id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30))
-    subtitle = db.Column(db.String(30))
-    description = db.Column(db.String(500))
+    title = db.Column(db.Text)
+    subtitle = db.Column(db.Text)
+    description = db.Column(db.Text)
     total_copies = db.Column(db.Integer, default=5)
     available_copies = db.Column(db.Integer,default=5)
     author_id = db.Column(db.Integer, db.ForeignKey('Authors.author_id'), nullable=False)
