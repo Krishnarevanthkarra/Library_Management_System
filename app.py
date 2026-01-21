@@ -16,8 +16,9 @@ with app.app_context():
     branches = ['Computer Science', 'Information Technology',
             'Data Science', 'AIML', 'Mechanical', 'Civil']
     for branch in branches:
-        db.session.add(models.Branch(branch_name=branch))
-        db.session.commit()
+        if not models.Branch.query.filter_by(branch_name=branch).first(): 
+            db.session.add(models.Branch(branch_name=branch)) 
+    db.session.commit()
 
 @app.before_request
 def check_login():
